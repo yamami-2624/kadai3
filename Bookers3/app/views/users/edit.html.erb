@@ -1,0 +1,39 @@
+<!-- 投稿内容編集 -->
+<%= form_for(@user) do |f| %>
+<% if @user.errors.any? %>
+  <div>
+    <ul style="color: red">
+      <% @user.errors.full_messages.each do |message| %>
+      <h3><%= @user.errors.count %> errors prohibited this obj from being saved</h3>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="container">
+<div class="row">
+<div class='col-xs-3'>
+	<h1>User info</h1>
+<table class='table'>
+    <label>Name</label>
+     <%= f.text_field :name, id: :user_name %></br>
+
+  <label>image</label></br>
+  <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %></br>
+
+    <lavel>introduction</lavel>
+     <%= f.text_area :introduction, id: :user_introduction %></br>
+</table>
+
+<div class='row'>
+  <%= f.submit "Update User" %></br>
+</div>
+</div>
+</div>
+ <% end %>
+
+
+
+<!-- </div>
+</div>
+</div> -->
