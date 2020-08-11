@@ -3,8 +3,8 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-3">
-    	<%= render "users/profile", user: @curent_user %>
-        <%= render 'books/new', book: @book %>
+    	<%= render "users/profile", user: @book.user %>
+        <%= render 'books/new', book: Book.new %>
       </div>
        <div class="col-xs-9">
 <table class="table table-striped">
@@ -12,7 +12,10 @@
 <h2> Book detail </h2>
 
 <tr>
-  <th><%= link_to attachment_image_tag(@user, :profile_image, :fill, 15, 15, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb"),user_path(@user)%><%= link_to @user.name, user_path(@user)%></th>
+  <th><%= link_to(@book.user) do %>
+  <% attachment_image_tag(@book.user, :profile_image, :fill, 15, 15, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb")%>
+  <%=@book.user.name%></th>
+    <% end %>
   <th><%= @book.title %></th>
   <th><%= @book.body %></th>
   <% if @user == current_user %>

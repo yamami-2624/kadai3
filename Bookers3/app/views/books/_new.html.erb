@@ -1,5 +1,8 @@
 <!-- <table class="table table-striped"> -->
 <h1>New book</h1>
+
+
+<%= form_for(book) do |f| %>
 <% if book.errors.any? %>
   <div>
     <ul style="color: red">
@@ -10,8 +13,6 @@
     </ul>
   </div>
 <% end %>
-
-<%= form_for(book) do |f| %>
 
   <div class="field row">
     <%= f.label :title %></br>
