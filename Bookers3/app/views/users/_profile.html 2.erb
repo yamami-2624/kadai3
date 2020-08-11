@@ -1,0 +1,31 @@
+<h1>User info</h1>
+<div class="profile-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <div class="profile-container">
+          <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+        </div>
+      </tr>
+
+      <tr>
+        <th>name</th>
+        <th><div class="profile-name"><%= user.name %></div></th>
+      </tr>
+
+      <tr>
+        <th>introduce</th>
+        <th><div class="profile-introduction"><%= user.introduction %></div></th>
+      </tr>
+
+    <!--   <button type="button" class="btn btn-primary btn-block"> -->
+    </thead>
+  </table>
+</div>
+
+<div class="botan">
+  <%= link_to "", edit_user_path(current_user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %><br>
+</div>
+
+
+
