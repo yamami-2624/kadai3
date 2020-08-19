@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+  	<div class="col-xs-10">
+		<h1>Followers.Users</h1>
+		      <table class = table>
+		        <thead>
+		          <tr>
+		            <th>image</th>
+		            <th>name</th>
+		            <th></th>
+		            <th></th>
+		            <th></th>
+		          </tr>
+		        </thead>
+
+		        <tbody>
+		          <% @user.followers.each do |user| %>
+		            <tr>
+		            	<td><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %></td>
+		                <td><%= link_to user.name, user_path(user) %></td>
+				          <% user ||= current_user %>
+				          <div class="stats">
+				            <td>
+				              <a href="<%= following_user_path(user) %>">
+				                <strong id="following" class="stat">
+				                  <%= @user.followings.count %>
+				                </strong>
+				                following
+				              </a>
+				            </td>
+				            <td>
+				              <a href="<%= followers_user_path(user) %>">
+				                <strong id="followers" class="stat">
+				                  <%= @user.followers.count %>
+				                </strong>
+				                followers
+				              </a>
+				            </td>
+				          </div>
+				    </tr>
+				  <% end %>
+				</tbody>
+			</table>
+	</div>
+  </div>
+</div>
+
+
