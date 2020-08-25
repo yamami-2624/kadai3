@@ -1,0 +1,54 @@
+<h1>User info</h1>
+<div class="profile-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <div class="profile-container">
+          <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+        </div>
+      </tr>
+
+      <tr>
+        <th>name</th>
+        <th><div class="profile-name"><%= user.name %></div></th>
+      </tr>
+
+      <tr>
+        <th>introduce</th>
+        <th><div class="profile-introduction"><%= user.introduction %></div></th>
+      </tr>
+
+      <tr>
+        <% user ||= current_user %>
+          <div class="stats">
+            <th>following</th>
+            <th>
+            	<a href="<%= following_user_path(user) %>">
+            	<strong id="following" class="stat"><%= user.followings.count %></strong>
+                </a>
+            </th>
+          </tr>
+          <tr>
+            <th>followers</th>
+            <th>
+            <a href="<%= followers_user_path(user) %>">
+                <strong id="followers" class="stat"><%= user.followers.count %></strong>
+              </a>
+            </th>
+          </tr>
+          </div>
+      </tr>
+
+    <!--   <button type="button" class="btn btn-primary btn-block"> -->
+    </thead>
+  </table>
+</div>
+<% unless current_user?(user) %>
+  <div id="follow_form">
+  <% if current_user.following?(user) %>
+    <%= link_to "Unfollow", user_relationships_path(user), method: :DELETE, class: "col-xs-12 btn btn-large btn-primary follow-btn" %>
+  <% else %>
+    <%= link_to "Follow", user_relationships_path(user), method: :POST, class: "col-xs-12 btn btn-large btn-primary follow-btn" %>
+  <% end %>
+  </div>
+<% end %>

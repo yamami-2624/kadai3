@@ -1,0 +1,23 @@
+          <table>
+            <thead>
+            </thead>
+
+            <tbody>
+                <% book.book_comment.each do |book_comment| %>
+                <tr>
+                  <th>
+                  <%= attachment_image_tag(book_comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb")%>
+                  <%= book_comment.user.name %>
+                  </th>
+                  <th>
+                  <%= book_comment.comment %>
+                  </th>
+                  <td>
+                  <div><% if book_comment.user == current_user %>
+                  <%= link_to 'Destroy', book_book_comment_path(book,book_comment),method: :delete %></div>
+                  <% end %>
+                  </td>
+                  <% end %>
+                </tr>
+            </tbody>
+          </table>

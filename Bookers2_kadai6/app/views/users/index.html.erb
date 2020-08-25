@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+<!-- 投稿者一覧 -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3">
+        <%= render "users/profile", user: current_user %>
+        <%= render 'books/new', book: @book %>
+    </div>
+    <div class="col-xs-9">  <!-- ここを追加 -->
+    <table class="table table-striped">
+      <h1>Users</h1>
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %></td>
+            <td><%= user.name %></td>
+            <% user ||= current_user %>
+                  <div class="stats">
+                    <th>
+                      フォロー数：
+                      <a href="<%= following_user_path(user) %>">
+                        <strong id="following" class="stat">
+                          <%= user.followings.count %>
+                        </strong>
+                      </a>
+                    </th>
+                    <th>
+                      フォロワー数：
+                      <a href="<%= followers_user_path(user) %>">
+                        <strong id="followers" class="stat">
+                          <%= user.followers.count %>
+                        </strong>
+                      </a>
+                    </th>
+                  </div>
+                  <th>
+                  <% unless current_user?(user) %>
+                  <div id="follow_form">
+                  <% if current_user.following?(user) %>
+                    <%= link_to "フォローを外す", user_relationships_path(user), method: :DELETE, class: " btn btn-large  follow-btn" %>
+                  <% else %>
+                    <%= link_to "フォローする", user_relationships_path(user), method: :POST, class: " btn btn-large  follow-btn" %>
+                  <% end %>
+                  </div>
+                  </th>
+                   <td><%= link_to 'Show', user_path(user) %></td>
+                <% end %>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+<br>
+
+                  <% user ||= current_user %>
+                  <div class="stats">
+                    <th>
+                      <a href="<%= following_user_path(user) %>">
+                        <strong id="following" class="stat">
+                          <%= user.followings.count %>
+                        </strong>
+                        following
+                      </a>
+                    </th>
+                    <th>
+                      <a href="<%= followers_user_path(user) %>">
+                        <strong id="followers" class="stat">
+                          <%= user.followers.count %>
+                        </strong>
+                        followers
+                      </a>
+                    </th>
+                  </div>
